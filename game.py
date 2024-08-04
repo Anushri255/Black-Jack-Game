@@ -162,6 +162,39 @@ def sort_by_chips(player_list):
                 
     return sortedPlayerList
 
+# play_blackjack_games allows the player at position player_pos to play blackjack until they don't wish to play.
+# The game statistics for the player are updated in player_list after each game. The function returns the updated player_list.
+def play_blackjack_games(player_list, player_pos):
+        
+    game_result = 0                      
+    noChips = player_list[player_pos][5] 
+    play = "y"                            
+    
+    while play == "y":
+
+        game_result, chipsLeft = blackjack.play_one_game(noChips)
+        noChips = chipsLeft
+        
+        if game_result == 1:
+            player_list[player_pos][4] = 1 + player_list[player_pos][4]
+            player_list[player_pos][6] = player_list[player_pos][6] + 1
+
+        elif game_result == 3:
+            player_list[player_pos][2] = 1 + player_list[player_pos][2]
+            player_list[player_pos][6] = player_list[player_pos][6] + 3
+
+        elif game_result == 0:
+            player_list[player_pos][3] = 1 + player_list[player_pos][3]
+
+        player_list[player_pos][1] = 1 + player_list[player_pos][1]
+
+        player_list[player_pos][5] = noChips
+        print()
+        play = input("Play again [y/n]? ")
+
+    return player_list
+
+
 filename = "players.txt"
 players = read_file(filename)
 print(players)
