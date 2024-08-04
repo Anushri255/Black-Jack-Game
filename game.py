@@ -130,6 +130,38 @@ def display_highest_chip_holder(player_list):
             print("Highest Chip Holder =>",player_list[position][0], "with", highest, "chips!")
 
 
+# The sort_by_chips function takes player_list as a parameter and sorts the list in descending order of chip balance.
+# The function returns the sortedPlayerList which is the player_list in descending order.
+def sort_by_chips(player_list):
+    
+    sortedPlayerList = [] 
+    i=0                   
+
+    
+    while i < len(player_list):
+        
+        sortedPlayerList.append(player_list[i])
+        i = i + 1
+        
+
+    for outerIndex in range(len(sortedPlayerList)-1, 0, -1):
+        
+     for innerIndex in range(outerIndex):
+         
+        if sortedPlayerList[innerIndex][5] < sortedPlayerList[innerIndex+1][5]:
+            sortedPlayerList[innerIndex], sortedPlayerList[innerIndex +1] = sortedPlayerList[innerIndex+1], sortedPlayerList[innerIndex]
+
+    for i in range(len(sortedPlayerList)-1, 0, -1):
+        
+     for j in range(i):
+         
+        if sortedPlayerList[j][5] == sortedPlayerList[j+1][5]:
+
+            if sortedPlayerList[j][1] > sortedPlayerList[j+1][1]:
+                sortedPlayerList[j], sortedPlayerList[j+1] = sortedPlayerList[j+1], sortedPlayerList[j]
+                
+    return sortedPlayerList
+
 filename = "players.txt"
 players = read_file(filename)
 print(players)
