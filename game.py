@@ -194,6 +194,48 @@ def play_blackjack_games(player_list, player_pos):
 
     return player_list
 
+# The remove_player removes the player from the player_list list if the player exists in the player_list list of lists.
+# The function returns the updated player_list once the player has been removed.
+def remove_player(player_list, name):
+
+    counter = 0         
+    index = 0           
+    tempList = []       
+    tempListofList = [] 
+    temp = ""           
+    
+    position = find_players(player_list, name)
+    print()
+
+    if position == -1:
+        print(name,"is not found in players.")
+        print()
+        
+    else:
+
+        while index < len(player_list):
+            
+            for counter in range(0,7):
+
+                if player_list[index][0] == name:
+                    temp = player_list[index][counter]
+
+                else:
+                    tempList.append(player_list[index][counter])
+
+                counter = counter + 1
+
+            if player_list[index][0] != name:
+                tempListofList.append(tempList)
+
+            tempList = []
+            index = index + 1
+
+        player_list = tempListofList
+        print("Successfully removed",name,"from player list.")
+        print()
+        
+    return player_list
 
 filename = "players.txt"
 players = read_file(filename)
