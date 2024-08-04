@@ -77,6 +77,57 @@ def buy_player_chips(player_list, name):
     # The player list with the updated chip balance is returned. 
     return player_list
     
+# The display_highest_chip_balance function takes player_list as a paramter and displays the player's name who has the highest chip balance from player_list.
+def display_highest_chip_holder(player_list):
+
+    index = 0                       # Incremental variable used to loop through player_list.
+    counter = 0                     # Incremental variable used to loop through player_list.
+    highest = 0                     # Stores the highest chip balance 
+    position = 0                    # Stores the index of the player which has the highest cbip balance. 
+    chipZero = 0                    # Incremental variable to keep count of how many players have a chip balance of 0.
+    numOfPlayers = len(player_list) # Stores the length of the player_list 
+
+    # If the numOfPlayers is 0, meaning that no players are stored inside the list, it displays an error.
+    if numOfPlayers == 0:
+        print("No players are added")
+
+    else:
+        
+        # Nested while loop to loop through the player_list
+        while index < len(player_list):
+            counter = 0 
+            while counter < len(player_list[index]):
+
+                if counter == 5:
+
+                    # if the value at player_list at index is greater than highest, then it is replaced with the value of highest.
+                    # and the index is stored in position.
+                    if player_list[index][counter] > highest:
+                        highest = player_list[index][counter]
+                        position = index
+
+                    # If the value at player_list at index is the same as the value of highest, then
+                    # it checks which player has played the least number of games. And stores that
+                    # player's index in position.
+                    elif player_list[index][counter] == highest:
+                        if int(player_list[index][1]) < int(player_list[position][1]):
+                            highest = player_list[index][counter]
+                            position = index
+
+                    # If the chip balance for player at index player_list is 0, chipZero is incremented by 1.
+                    if player_list[index][counter] == 0:
+                        chipZero = chipZero + 1
+                            
+                counter = counter + 1
+            index = index + 1
+
+        # If chipZero is the equal to numOfPlayers, meaning that all the players in the list have 0 chip balance, it displays an error message.
+        if chipZero == numOfPlayers:
+            print("All players have a chip balance of zero")
+
+        else:
+            
+            print("Highest Chip Holder =>",player_list[position][0], "with", highest, "chips!")
 
 
 filename = "players.txt"
