@@ -237,6 +237,30 @@ def remove_player(player_list, name):
         
     return player_list
 
+
+# The add_player function adds a player to the player_list list of lists only if the player doesn't exist in the player_list list.
+# The function returns the updated  player_list.
+def add_player(player_list, name):
+
+    position = find_players(player_list, name)
+
+    print()
+
+    if position == -1:
+        
+        addPlayer = [name,0,0,0,0,100,0]
+        player_list.append(addPlayer)
+        print("Successfully added",name, "to player list.")
+
+    else:
+        print(name,"already exists in player list.")
+
+    print()
+
+    return player_list
+
+
+
 filename = "players.txt"
 players = read_file(filename)
 print(players)
