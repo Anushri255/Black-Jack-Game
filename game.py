@@ -42,6 +42,43 @@ def read_file(filename):
     return player_list
 
 
+# buy_player_chips function allows a player to buy chips, only if the player exits in the player_list list of lists.
+# The function returns the updated player_list.
+def buy_player_chips(player_list, name):
+
+    # The find_players function is called to check if the player name entered is included in the player_list.
+    # The function returns a position of the player in the player list, if the player doesn't exist, it returns -1.
+    position = find_players(player_list, name)
+    print()
+    
+
+    # If the function returns a position of -1, an error message is displayed.
+    if position == -1:
+        print(name,"is not found in player list.")
+
+
+    # If the player exists in player_list, the player is allowed to update the chip balance.
+    else:
+        print(name, "currently has", player_list[position][5], "chips.")
+        print()
+        qty = int(input("How many chips would you like to buy? "))
+
+
+        # The while loop continues until the user enters a valid input (i.e between 1 and 100)
+        while qty > 100 or qty < 1:
+            print("You may only buy between 1-100 chips at a time!")
+            print()
+            qty = int(input("How many chips would you like to buy? "))
+   
+        player_list[position][5] = player_list[position][5] + qty
+        print()
+        print("Successfully updated ", name,"'s chip balance to ",player_list[position][5], sep = "")
+
+    # The player list with the updated chip balance is returned. 
+    return player_list
+    
+
+
 filename = "players.txt"
 players = read_file(filename)
 print(players)
