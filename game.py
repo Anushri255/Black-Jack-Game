@@ -76,7 +76,64 @@ def buy_player_chips(player_list, name):
 
     # The player list with the updated chip balance is returned. 
     return player_list
+
+# The display_players function displays all the players data - name, games played, lost, won, drawn, chip balance and score to the screen.
+# The function doesn't return anything.
+def display_players(player_list):
+
+    counter = 0                                                             
+    index = 0                                                                 
+    formatting = "="*59                        
+    formatting2 = "-"*59                       
+    title = "Player Summary"                   
+    headings = "P  W  L  D   Chips   Score  -" 
+
     
+    print(formatting)
+    print("-", format(title, '^55'), "-")
+    print(formatting)
+    print("-",format(headings,'^85'))
+    print(formatting2)
+
+
+    # A nested while loop is used to display all the elements in the list.
+    while counter < len(player_list):
+
+        index = 0
+        
+        while index < len(player_list[counter]):
+
+                # The if - elif statements print the individual from player_list list of lists.  
+                if index == 0:
+                        print("-  ", end ="")
+                        print(format(player_list[counter][index],'<21'), end = "")
+                        
+                elif index == 1:
+                        print(format(player_list[counter][index],'>7'), end = "")
+                        
+                elif index == 2:
+                        print(format(player_list[counter][index],'>3'), end = "")
+
+                elif index == 3:
+                        print(format(player_list[counter][index],'>3'), end = "")
+
+                elif index == 4:
+                        print(format(player_list[counter][index],'>3'), end = "")
+
+                elif index == 5:
+                        print(format(player_list[counter][index],'>8'), end = "")
+
+                elif index == 6:
+                        print(format(player_list[counter][index],'>8'), end ="")
+                        print("  -")
+
+                index = index + 1
+
+        print(formatting2)
+        counter = counter + 1
+        
+    print(formatting)
+
 # The display_highest_chip_balance function takes player_list as a paramter and displays the player's name who has the highest chip balance from player_list.
 def display_highest_chip_holder(player_list):
 
