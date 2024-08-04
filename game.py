@@ -193,6 +193,35 @@ def display_highest_chip_holder(player_list):
             
             print("Highest Chip Holder =>",player_list[position][0], "with", highest, "chips!")
 
+# The write_to_file function outputs the player_list, list of lists to text file called new_players.txt.
+# The function doesn't return anything
+def write_to_file(filename, player_list):
+
+    index = 0      
+    innerIndex = 0 
+    outfile = open(filename, "w") 
+
+    # While loop to loop through player_list list of lists.
+    while index < len(player_list):
+
+        innerIndex = 0
+
+        while innerIndex < len(player_list[index]):
+
+            if innerIndex == 0:
+                outfile.write(str(player_list[index][innerIndex]))
+                outfile.write("\n")
+
+            else:
+                outfile.write(str(player_list[index][innerIndex]))
+                outfile.write(" ")
+                
+            innerIndex = innerIndex+1
+
+        outfile.write("\n")
+        index = index + 1
+
+    outfile.close()
 
 # The sort_by_chips function takes player_list as a parameter and sorts the list in descending order of chip balance.
 # The function returns the sortedPlayerList which is the player_list in descending order.
