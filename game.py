@@ -260,6 +260,129 @@ def add_player(player_list, name):
     return player_list
 
 
+player_list = []                       # Define list to store player information
+valid = "F"                            # Stores whether the user input is valid or not.
+userChoice = "choice"                  # Stores what command the user would like 
+player_list = read_file("players.txt") # Reads player information from file and store in player_list
+
+
+print("Please enter choice")
+userChoice =input("[list, buy, search, high, add, remove, play, chips, quit]: ")
+
+
+while (valid == "F") or (userChoice != "quit"):
+   
+    print()
+
+    if userChoice == "list":
+        display_players(player_list)
+        valid = "T"
+        
+    elif userChoice == "buy":
+        name = input("Please enter name: ")
+        player_list = buy_player_chips(player_list, name)
+        valid = "T"
+
+    elif userChoice == "search":
+        name = input("Please enter name: ")
+
+        position = find_players(player_list, name)
+
+        if position == -1:
+            print(name," is not found in player list.")
+            print()
+
+        else:
+            print()
+            print(player_list[position][0],"stats:")
+            print()
+            print("P  W  L  D  Score")
+
+            for i in range(1,7):
+                if i == 1:
+                    print(format(player_list[position][i],'<2'), end = "")
+
+                elif i == 2:
+                    print(format(player_list[position][i],'>2'), end = "")
+
+                elif i == 3:
+                    print(format(player_list[position][i],'>3'), end = "")
+
+                elif i == 4:
+                    print(format(player_list[position][i],'>3'), end = "")
+
+                elif i == 6:
+                    print(format(player_list[position][i],'>4'))
+                
+                i = i + 1
+                
+            print()
+            print("Chips:", end = "")
+            print(format(player_list[position][5],'>5'))
+            print()
+            
+        valid = "T"
+
+    elif userChoice == "high":
+        
+        highest = display_highest_chip_holder(player_list)
+        print()
+        valid = "T"
+
+    elif userChoice == "add":
+        name = input("Please enter name: ")
+        
+        player_list = add_player(player_list, name)
+        valid = "T"
+
+    elif userChoice == "remove":
+        name = input("Please enter name: ")
+
+        player_list = remove_player(player_list, name)
+        valid = "T"
+
+    elif userChoice == "play":
+        name=input("Please enter name: ")
+
+        # The find_players function is called to check if the name inputted by the user exists in the player_list.
+        # The value which the find_players function returns is stored in player_pos.
+        player_pos = find_players(player_list, name)
+
+        # If the player_pos is -1, an error message is shown and the user cannot play the game.
+        if player_pos == -1:
+            print()
+            print(name, "is not found in player list.")
+            print()
+
+        else:
+            player_list = play_blackjack_games(player_list, player_pos)
+        
+        valid = "T"
+
+    # If user inputs chips, the sort_by_chips function is called.
+    elif userChoice == "chips":
+        print()
+
+        sortedPlayerList = sort_by_chips(player_list)
+        display_sorted_player_list(sortedPlayerList)
+        valid = "T"
+
+    # If user inputs quit, the loop ends.
+    elif userChoice == "quit":
+        valid = "T"
+
+    # If user enters an invalid input, they are prompted to enter it again.    
+    else:
+        print("Not a valid command - please try again.")
+        print()
+        valid = "T"
+        
+    print()
+
+    print("Please enter choice")
+    userChoice = input("[list, buy, search, high, add, remove, play, chips, quit]: ")
+
+
 
 filename = "players.txt"
 players = read_file(filename)
