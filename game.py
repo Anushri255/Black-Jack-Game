@@ -287,6 +287,35 @@ def play_blackjack_games(player_list, player_pos):
 
     return player_list
 
+# The find_players function checks if a given player name exists in the player_list list.
+# If the player exists, it returns the position, if they don't it returns a value of -1.
+def find_players(player_list, name):
+
+    index = 0   
+    counter = 0  
+    position = 0 
+    temp = 0     
+
+
+    while index < len(player_list):
+        
+        for counter in range(0,1):
+
+            if name == player_list[index][counter]:
+                temp = index
+
+
+        if name == player_list[temp][0]:
+            position = temp
+        
+        else:
+            temp = -1 
+            position = -1 
+            
+        index = index + 1
+
+    return position
+
 # The remove_player removes the player from the player_list list if the player exists in the player_list list of lists.
 # The function returns the updated player_list once the player has been removed.
 def remove_player(player_list, name):
