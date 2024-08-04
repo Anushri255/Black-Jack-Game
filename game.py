@@ -506,6 +506,8 @@ while (valid == "F") or (userChoice != "quit"):
 
 
 
-filename = "players.txt"
-players = read_file(filename)
-print(players)
+print("\n\n-- Program terminating --\n")
+print("Thank you for playing!")
+filename = "new_players.txt"
+
+write_to_file(filename, player_list)
